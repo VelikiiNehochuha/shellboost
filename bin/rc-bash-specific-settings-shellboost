@@ -221,6 +221,16 @@ boost_git_ps1() {
     printf "%b\n" "$branch$status"
 }
 
+
+boost_python_virtual_environment_ps1() {
+    # if python virtual environment activated
+    if [[ "$VIRTUAL_ENV" != "" ]] then
+      printf $(printf "%s" "$VIRTUAL_ENV" | rev | cut -d'/' -f-2 | rev)
+    else
+      printf ""
+    fi
+}
+
 # Display exit code at right if non-zero.
 show_exit_code_rprompt() {
     local exit_code=$1
@@ -255,7 +265,7 @@ show_exit_code_rprompt() {
         local msg=" Exit $exit_code$symbolic_name"
 
         # Colors.
-        local sep_color="\033[31;40m"       # Red fg on black bg.
+        local sep_color="\033[31;230m"       # Red fg on black bg.
         local msg_color="\033[1;37;41m"     # White fg on red bg.
         local square_color="\033[1;37;41m"  # White on red.
         local reset_color="\033[0m"
@@ -295,7 +305,7 @@ set_prompt() {
     local GIT_BG="\[\033[48;5;240m\]"
     local GIT_FG="\[\033[38;5;15m\]"
 
-    local FINAL_BG="\[\033[48;5;0m\]"         # Final background (e.g. black).
+    local FINAL_BG="\[\033[48;5;230m\]"         # Final background (e.g. black).
     local GIT_SEP_FG="\[\033[38;5;240m\]"     # Foreground same as GIT_BG for seamless look.
     local FINAL_SEP_FG="\[\033[38;5;25m\]"    # Match DIR_BG for clean blue separator.
     # Prompt assembly.
@@ -303,7 +313,9 @@ set_prompt() {
 
     # First line: user@host and working directory.
     PS1+="\n"
-    PS1+="${USER_BG}${USER_FG}\u@\h ${RESET}${DIR_BG}\[\033[38;5;136m\]${SEPARATOR_RIGHT}${RESET}"
+    if [[ "$VIRTUAL_ENV" != "" ]] then
+      PS1+="${USER_BG}${USER_FG}$(boost_python_virtual_environment_ps1) ${RESET}${DIR_BG}\[\033[38;5;136m\]${SEPARATOR_RIGHT}${RESET}"
+    fi
     PS1+="${DIR_BG}${DIR_FG} \w ${RESET}"
 
     # Git status, only if inside repo.

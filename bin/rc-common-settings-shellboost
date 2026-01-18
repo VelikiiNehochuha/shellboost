@@ -13,9 +13,9 @@ export EDITOR="$VISUAL"
 locale="en_US.utf8"
 
 if locale -a | grep -q "$locale"; then
-    export LANG="$locale"
-    export LC_ALL="$LANG"               # Consistent character encoding.
-    printf >&2 "Locale '%s' is set.\n" "$locale"
+     export LANG="$locale"
+     export LC_ALL="$LANG"               # Consistent character encoding.
+     # printf >&2 "Locale '%s' is set.\n" "$locale"
 else
     printf >&2 "Warning: '%s' locale unavailable.\n" "$locale"
     printf >&2 "Hint: You may need to manually install it with 'sudo locale-gen %s'.\n" "$locale"
@@ -65,9 +65,9 @@ if [ -n "$TEXLIVE_DIR" ] && [ -d "$TEXLIVE_DIR" ]; then
     export MANPATH="${MANPATH:+${MANPATH}:}${TEXLIVE_DIR}/texmf-dist/doc/man"
     export INFOPATH="${INFOPATH:+${INFOPATH}:}${TEXLIVE_DIR}/texmf-dist/doc/info"
 
-    printf >&2 'TeX Live found: %s (%s)\n' "$TEXLIVE_DIR" "$TL_PLATFORM"
-else
-    printf >&2 'No TeX Live installation detected.\n'
+    # printf >&2 'TeX Live found: %s (%s)\n' "$TEXLIVE_DIR" "$TL_PLATFORM"
+#else
+    # printf >&2 'No TeX Live installation detected.\n'
 fi
 
 # Columnar format with type indicators.
