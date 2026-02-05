@@ -324,21 +324,21 @@ set_prompt() {
     local GIT_FG="\[\033[38;5;0m\]"
 
     local FINAL_BG="\[\033[48;5;230m\]"         # Final background (e.g. black).
-    local GIT_SEP_FG="\[\033[38;5;37m\]"     # Foreground same as GIT_BG for seamless look.
-    local FINAL_SEP_FG="\[\033[38;5;37m\]"    # Match DIR_BG for clean blue separator.
+    local GIT_SEP_FG="\[\033[38;5;254m\]"     # Foreground same as GIT_BG for seamless look.
+    local FINAL_SEP_FG="\[\033[38;5;254m\]"    # Match DIR_BG for clean blue separator.
     # Prompt assembly.
     PS1=""
 
     # First line: user@host and working directory.
     PS1+="\n"
     if [[ "$VIRTUAL_ENV" != "" ]] then
-      PS1+="${USER_BG}${USER_FG}$(boost_python_virtual_environment_ps1) ${DIR_BG}\[\033[38;5;37m\]${SEPARATOR_RIGHT}${RESET}"
+      PS1+="${USER_BG}${USER_FG}$(boost_python_virtual_environment_ps1) ${DIR_BG}\[\033[38;5;254m\]${SEPARATOR_RIGHT}${RESET}"
     fi
-    PS1+="${DIR_BG}\[\033[38;5;37m\]${DIR_FG} \w ${RESET}"
+    PS1+="${DIR_BG}\[\033[38;5;254m\]${DIR_FG} \w ${RESET}"
 
     # Git status, only if inside repo.
     if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-        PS1+="${GIT_BG}\[\033[38;5;37m\]${SEPARATOR_RIGHT}${RESET}"
+        PS1+="${GIT_BG}\[\033[38;5;254m\]${SEPARATOR_RIGHT}${RESET}"
         PS1+="${GIT_BG}${GIT_FG} $(boost_git_ps1) ${RESET}"
         PS1+="${GIT_SEP_FG}${FINAL_BG}${SEPARATOR_RIGHT}${RESET}"
     else
