@@ -283,15 +283,13 @@ show_exit_code_rprompt() {
         local msg=" Exit $exit_code$symbolic_name"
 
         # Colors.
-        local sep_color="\033[31;230m"       # Red fg on black bg.
-        local msg_color="\033[1;37;41m"     # White fg on red bg.
-        local square_color="\033[1;37;41m"  # White on red.
+        local sep_color="\033[48;5;230m"       # Red fg on black bg.
+        local msg_color="\033[38;5;160m"     # White fg on red bg.
+        local square_color="\033[48;5;230m"  # White on red.
         local reset_color="\033[0m"
 
         # Format parts (do NOT include trailing space inside color!).
-        local formatted_sep="${sep_color}${separator_left}${reset_color}"
         local formatted_msg="${msg_color}${msg}"
-        local formatted_square="${square_color}${white_square} ${reset_color}"
 
         # Calculate visible length.
         local visible_len=$((${#msg} + 4))  #  + msg + ■ + 1 space.
@@ -301,7 +299,7 @@ show_exit_code_rprompt() {
 
         printf "\033[s"                             # Save cursor.
         printf "\033[1G\033[%dC" "$padding"         # Move to column.
-        printf "%b%b %b" "$formatted_sep" "$formatted_msg" "$formatted_square"
+        printf "%b%b %b" "$formatted_msg"
         printf "\033[u"                             # Restore cursor.
     fi
 }
