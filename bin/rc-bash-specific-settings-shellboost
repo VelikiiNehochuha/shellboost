@@ -106,6 +106,24 @@ repeat() {
   done
 }
 
+retry() {
+  local count=$1
+  shift
+  if [[ -z "$count" || "$count" -le 0 ]]; then
+    printf "Usage: repeat N command [args...]\n"
+    return 1
+  fi
+  for ((i=1; i<=count; i++)); do
+    "$@"
+
+    if [ $? -eq 0 ]; then
+        echo "Condition met, breaking loop."
+        break
+    fi
+  done
+}
+
+
 # M-S-l: Send the string 'ls' followed by a newline.
 bind '"\eL": "ls\n"'
 
@@ -296,31 +314,31 @@ set_prompt() {
     # Colors (with proper Bash escapes).
     local RESET="\[\033[0m\]"
 
-    local USER_BG="\[\033[48;5;136m\]"
-    local USER_FG="\[\033[38;5;234m\]"
+    local USER_BG="\[\033[48;5;254m\]"
+    local USER_FG="\[\033[38;5;0m\]"
 
-    local DIR_BG="\[\033[48;5;25m\]"
-    local DIR_FG="\[\033[38;5;15m\]"
+    local DIR_BG="\[\033[48;5;254m\]"
+    local DIR_FG="\[\033[38;5;0m\]"
 
-    local GIT_BG="\[\033[48;5;240m\]"
-    local GIT_FG="\[\033[38;5;15m\]"
+    local GIT_BG="\[\033[48;5;254m\]"
+    local GIT_FG="\[\033[38;5;0m\]"
 
-    local FINAL_BG="\[\033[48;5;230m\]"         # Final background (e.g. black).
-    local GIT_SEP_FG="\[\033[38;5;240m\]"     # Foreground same as GIT_BG for seamless look.
-    local FINAL_SEP_FG="\[\033[38;5;25m\]"    # Match DIR_BG for clean blue separator.
+    local FINAL_BG="\[\033[48;5;254m\]"         # Final background (e.g. black).
+    local GIT_SEP_FG="\[\033[38;5;252m\]"     # Foreground same as GIT_BG for seamless look.
+    local FINAL_SEP_FG="\[\033[38;5;252m\]"    # Match DIR_BG for clean blue separator.
     # Prompt assembly.
     PS1=""
 
     # First line: user@host and working directory.
     PS1+="\n"
     if [[ "$VIRTUAL_ENV" != "" ]] then
-      PS1+="${USER_BG}${USER_FG}$(boost_python_virtual_environment_ps1) ${RESET}${DIR_BG}\[\033[38;5;136m\]${SEPARATOR_RIGHT}${RESET}"
+      PS1+="${USER_BG}${USER_FG}$(boost_python_virtual_environment_ps1) ${RESET}${DIR_BG}\[\033[38;5;252m\]${SEPARATOR_RIGHT}${RESET}"
     fi
     PS1+="${DIR_BG}${DIR_FG} \w ${RESET}"
 
     # Git status, only if inside repo.
     if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-        PS1+="${GIT_BG}\[\033[38;5;25m\]${SEPARATOR_RIGHT}${RESET}"
+        PS1+="${GIT_BG}\[\033[38;5;252m\]${SEPARATOR_RIGHT}${RESET}"
         PS1+="${GIT_BG}${GIT_FG} $(boost_git_ps1) ${RESET}"
         PS1+="${GIT_SEP_FG}${FINAL_BG}${SEPARATOR_RIGHT}${RESET}"
     else
