@@ -195,12 +195,12 @@ boost_git_ps1() {
     branch="$(git symbolic-ref --short -q HEAD 2> /dev/null || git rev-parse --short HEAD 2> /dev/null)"
 
     # Custom colors.
-    local GIT_DIRTY_COLOR="\033[31;1m"
-    local GIT_STAGED_COLOR="\033[32;1m"     # Green (good to go / ready).
-    local GIT_STASH_COLOR="\033[36m"        # Cyan (info).
-    local GIT_UNTRACKED_COLOR="\033[33;1m"  # Yellow (warning light).
-    local GIT_OUTGOING_COLOR="\033[35;1m"   # Purple for contrast.
-    local GIT_INCOMING_COLOR="\033[36;1m"   # Cyan (info).
+    local GIT_DIRTY_COLOR="\033[38;5;160m"
+    local GIT_STAGED_COLOR="\033[38;5;64m"     # Green (good to go / ready).
+    local GIT_STASH_COLOR="\033[38;5;37m"        # Cyan (info).
+    local GIT_UNTRACKED_COLOR="\033[38;5;136m"  # Yellow (warning light).
+    local GIT_OUTGOING_COLOR="\033[38;5;125m"   # Purple for contrast.
+    local GIT_INCOMING_COLOR="\033[38;5;37m"   # Cyan (info).
 
     # Color the markers, don't reset immediately.
     # Dirty (unstaged).
