@@ -297,8 +297,12 @@ set_prompt() {
     # Colors (with proper Bash escapes).
     local RESET="\[\033[0m\]"
 
-    local USER_BG="\[\033[48;5;136m\]"
-    local USER_FG="\[\033[38;5;234m\]"
+    # local USER_BG="\[\033[48;5;136m\]"
+    # local USER_FG="\[\033[38;5;234m\]"
+
+    local USER_BG="\[\033[48;5;34m\]"
+    local USER_FG="\[\033[38;2;0;0;0m\]"
+    local USER_SEP_FG="\[\033[38;5;34m\]"
 
     local DIR_BG="\[\033[48;5;25m\]"
     # local DIR_FG="\[\033[38;5;15m\]"
@@ -317,7 +321,7 @@ set_prompt() {
 
     # First line: user@host and working directory.
     PS1+="\n"
-    PS1+="${USER_BG}${USER_FG}\u@\h ${RESET}${DIR_BG}\[\033[38;5;136m\]${SEPARATOR_RIGHT}${RESET}"
+    PS1+="${USER_BG}${USER_FG}\u@\h ${RESET}${DIR_BG}${USER_SEP_FG}${SEPARATOR_RIGHT}${RESET}"
     PS1+="${DIR_BG}${DIR_FG} \w ${RESET}"
 
     # Git status, only if inside repo.
