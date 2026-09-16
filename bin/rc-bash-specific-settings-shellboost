@@ -255,9 +255,13 @@ show_exit_code_rprompt() {
         local msg=" Exit $exit_code$symbolic_name"
 
         # Colors.
-        local sep_color="\033[31;40m"       # Red fg on black bg.
-        local msg_color="\033[1;37;41m"     # White fg on red bg.
-        local square_color="\033[1;37;41m"  # White on red.
+
+        # local sep_color="\033[31;40m"       # Red fg on black bg.
+        # local msg_color="\033[1;37;41m"     # White fg on red bg.
+        # local square_color="\033[1;37;41m"  # White on red.
+        local sep_color="\033[31;48;2;255;255;255m" # Red fg on white bg.
+        local msg_color="\033[1;38;2;255;255;255;41m"     # True white fg on red bg.
+        local square_color="\033[1;38;2;255;255;255;41m"
         local reset_color="\033[0m"
 
         # Format parts (do NOT include trailing space inside color!).
@@ -290,12 +294,15 @@ set_prompt() {
     local USER_FG="\[\033[38;5;234m\]"
 
     local DIR_BG="\[\033[48;5;25m\]"
-    local DIR_FG="\[\033[38;5;15m\]"
+    # local DIR_FG="\[\033[38;5;15m\]"
+    local DIR_FG="\[\033[1;38;2;255;255;255m\]"
 
     local GIT_BG="\[\033[48;5;240m\]"
-    local GIT_FG="\[\033[38;5;15m\]"
+    # local GIT_FG="\[\033[38;5;15m\]"
+    local GIT_FG="\[\033[1;38;2;255;255;255m\]"
 
-    local FINAL_BG="\[\033[48;5;0m\]"         # Final background (e.g. black).
+    # local FINAL_BG="\[\033[48;5;0m\]"         # Final background (e.g. black).
+    local FINAL_BG="\[\033[48;2;255;255;255m\]"        # Final background (e.g. white).
     local GIT_SEP_FG="\[\033[38;5;240m\]"     # Foreground same as GIT_BG for seamless look.
     local FINAL_SEP_FG="\[\033[38;5;25m\]"    # Match DIR_BG for clean blue separator.
     # Prompt assembly.

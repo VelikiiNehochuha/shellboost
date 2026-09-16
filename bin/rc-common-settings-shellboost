@@ -6,7 +6,7 @@
 # Customize shell environment with aliases, PATH tweaks, and tool enhancements.
 
 # Set the default editor (change 'emacs' to your preferred editor).
-export VISUAL=emacs
+export VISUAL=nano
 export EDITOR="$VISUAL"
 
 # Check and configure locale settings.
